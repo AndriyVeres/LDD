@@ -1,15 +1,20 @@
 #include <linux/module.h>
 #include <linux/init.h>
+#include <linux/version.h>
+
+int myVariableA = 0;
+EXPORT_SYMBOL(myVariableA);
 
 static int hello_init(void)
 {
-printk(KERN_ALERT "hello_init\n");
+//Print current kernel version string
+printk(KERN_INFO "Kernel version: \"  \" \n");
 return 0;
 }
 
 static void hello_exit(void)
 {
-printk(KERN_ALERT "Hello exit\n");
+printk(KERN_ALERT "module exit\n");
 }
 
 module_init(hello_init);
