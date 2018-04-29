@@ -6,4 +6,4 @@
 4.13.0-39-generic
 
 ## Drivers:
-*  [scull ](../scull/master/README.md) - simple character utility for load localities
+*  [scull ](./scull/README.md) - simple character utility for load localities
