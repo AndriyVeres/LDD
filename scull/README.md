@@ -11,7 +11,8 @@
 
 ## How to download and build:
 1. Please be sure that on Your system installed linux-kernel headers, with version, that correspond to version of linux kernel that You use.
->  For example for me it was: `/usr/src/linux-headers-4.10.0-42-generic` on Ubuntu You can download it via `sudo apt-get install linux-headers-<kernel_version>-generic`, Y/usr/src/-4.10.0-42ou can check Your kernel version via `uname -r`.
+>  For example for me it was: `/usr/src/linux-headers-4.10.0-42-generic` on Ubuntu You can download it via `sudo apt-get install linux-headers-<kernel_version>-generic`,
+>  You can check Your kernel version via `uname -r`.
 2. Download the repository : `git clone https://github.com/AndriyVeres/LDD.git`
 3. Checkout to release branch: `git checkout master`
 4. Change **KDIR** variable in Makefile, with respect of location linux kernel heades and version in Your system, for example for me it was: `KDIR:= /usr/src/linux-headers-4.10.0-42-generic`
