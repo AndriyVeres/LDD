@@ -251,6 +251,8 @@ else
 
 void klcd_clear_display(void)
 {
+    int i = 0;
+    int j = 0;
 
 	//step1
 	mdelay(150);                   /* delay after power ON*/
@@ -322,180 +324,69 @@ void klcd_clear_display(void)
 	gpio_set_value(LCD_E,true); /*Enable signal High */
 	DELAY;
 
-#if 0
-	DELAY;
-	gpio_set_value(LCD_E,false); /*Enable signal High */
-	DELAY;	
-	gpio_set_value(LCD_RW,true); /*Read */
-	gpio_set_value(LCD_RS,true); /*Data */
-	klcd_gpio_db_set(0x00);      /* DB 0-7 zero */
-	DELAY;
-	DELAY;
-	gpio_set_value(LCD_E,true); /*Enable signal High */
-	DELAY;
-	gpio_set_value(LCD_E,false); /*Enable signal High */
+    for(i = 0,j=0; i<255;++i) {
+        if(i<0x20 || (i >= 0x80 && i < 0xA0)) {
+            continue;
+        }
+        if(j % 16 == 0) {
+            mdelay(10000); /* TESTING DELAY */
 
-	mdelay(5);                   /* delay after first command*/
-	gpio_set_value(LCD_RW,false); /*Write */
-	gpio_set_value(LCD_RS,false); /*Instruction */
-	DELAY;
-	gpio_set_value(LCD_E,true); /*Enable signal High */
-	DELAY;
-	klcd_gpio_db_set(0x30);      /* DB 0-7 zero */
-	DELAY;
-	gpio_set_value(LCD_E,false); /*Enable signal High */
-	DELAY;	
-	gpio_set_value(LCD_RW,true); /*Read */
-	gpio_set_value(LCD_RS,true); /*Data */
-	klcd_gpio_db_set(0x00);      /* DB 0-7 zero */
-	DELAY;
-	DELAY;
-	gpio_set_value(LCD_E,true); /*Enable signal High */
-	DELAY;
-	gpio_set_value(LCD_E,false); /*Enable signal High */
+            mdelay(5);					 /* delay after first command*/
+            gpio_set_value(LCD_RW,false); /*Write */
+            gpio_set_value(LCD_RS,true); /*Instruction */
+            DELAY;
+            gpio_set_value(LCD_E,true); /*Enable signal High */
+            DELAY;
+            klcd_gpio_db_set(0x01);	   /* Clear display*/
+            DELAY;
+            gpio_set_value(LCD_E,false); /*Enable signal High */
+            DELAY;	
+            gpio_set_value(LCD_RW,true); /*Read */
+            DELAY;
+            gpio_set_value(LCD_E,true); /*Enable signal High */
+            DELAY;
 
-
-	mdelay(5);                   /* delay after first command*/
-	gpio_set_value(LCD_RW,false); /*Write */
-	gpio_set_value(LCD_RS,false); /*Instruction */
-	DELAY;
-	gpio_set_value(LCD_E,true); /*Enable signal High */
-	DELAY;
-	klcd_gpio_db_set(0x30);      /* DB 0-7 zero */
-	DELAY;
-	gpio_set_value(LCD_E,false); /*Enable signal High */
-	DELAY;	
-	gpio_set_value(LCD_RW,true); /*Read */
-	gpio_set_value(LCD_RS,true); /*Data */
-	klcd_gpio_db_set(0x00);      /* DB 0-7 zero */
-	DELAY;
-	DELAY;
-	gpio_set_value(LCD_E,true); /*Enable signal High */
-	DELAY;
-	gpio_set_value(LCD_E,false); /*Enable signal High */
-
-
-
-	mdelay(5);                   /* delay after first command*/
-	gpio_set_value(LCD_RW,false); /*Write */
-	gpio_set_value(LCD_RS,false); /*Instruction */
-	DELAY;
-	gpio_set_value(LCD_E,true); /*Enable signal High */
-	DELAY;
-	klcd_gpio_db_set(0x3C);      /* DB 0-7 zero */
-	//klcd_gpio_db_set(0x30);      /* DB 0-7 zero */
-	DELAY;
-	gpio_set_value(LCD_E,false); /*Enable signal High */
-	DELAY;	
-	gpio_set_value(LCD_RW,true); /*Read */
-	gpio_set_value(LCD_RS,true); /*Data */
-	klcd_gpio_db_set(0x00);      /* DB 0-7 zero */
-	DELAY;
-	DELAY;
-	gpio_set_value(LCD_E,true); /*Enable signal High */
-	DELAY;
-	gpio_set_value(LCD_E,false); /*Enable signal High */
-
-	mdelay(5);                   /* delay after first command*/
-	gpio_set_value(LCD_RW,false); /*Write */
-	gpio_set_value(LCD_RS,false); /*Instruction */
-	DELAY;
-	gpio_set_value(LCD_E,true); /*Enable signal High */
-	DELAY;
-	klcd_gpio_db_set(0x08);      /* DB 0-7 zero */
-	DELAY;
-	gpio_set_value(LCD_E,false); /*Enable signal High */
-	DELAY;	
-	gpio_set_value(LCD_RW,true); /*Read */
-	gpio_set_value(LCD_RS,true); /*Data */
-	klcd_gpio_db_set(0x00);      /* DB 0-7 zero */
-	DELAY;
-	DELAY;
-	gpio_set_value(LCD_E,true); /*Enable signal High */
-	DELAY;
-	gpio_set_value(LCD_E,false); /*Enable signal High */
-
-
-	mdelay(5);                   /* delay after first command*/
-	gpio_set_value(LCD_RW,false); /*Write */
-	gpio_set_value(LCD_RS,false); /*Instruction */
-	DELAY;
-	gpio_set_value(LCD_E,true); /*Enable signal High */
-	DELAY;
-	klcd_gpio_db_set(0x01);      /* DB 0-7 zero */
-	DELAY;
-	gpio_set_value(LCD_E,false); /*Enable signal High */
-	DELAY;	
-	gpio_set_value(LCD_RW,true); /*Read */
-	gpio_set_value(LCD_RS,true); /*Data */
-	klcd_gpio_db_set(0x00);      /* DB 0-7 zero */
-	DELAY;
-	DELAY;
-	gpio_set_value(LCD_E,true); /*Enable signal High */
-	DELAY;
-	gpio_set_value(LCD_E,false); /*Enable signal High */
-
-
-	mdelay(5);                   /* delay after first command*/
-	gpio_set_value(LCD_RW,false); /*Write */
-	gpio_set_value(LCD_RS,false); /*Instruction */
-	DELAY;
-	gpio_set_value(LCD_E,true); /*Enable signal High */
-	DELAY;
-	klcd_gpio_db_set(0x05);      /* DB 0-7 zero */
-	DELAY;
-	gpio_set_value(LCD_E,false); /*Enable signal High */
-	DELAY;	
-	gpio_set_value(LCD_RW,true); /*Read */
-	gpio_set_value(LCD_RS,true); /*Data */
-	klcd_gpio_db_set(0x00);      /* DB 0-7 zero */
-	DELAY;
-	DELAY;
-	gpio_set_value(LCD_E,true); /*Enable signal High */
-	DELAY;
-	gpio_set_value(LCD_E,false); /*Enable signal High */
-
-
-	mdelay(5);                   /* delay after first command*/
-	gpio_set_value(LCD_RW,false); /*Write */
-	gpio_set_value(LCD_RS,false); /*Instruction */
-	DELAY;
-	gpio_set_value(LCD_E,true); /*Enable signal High */
-	DELAY;
-	klcd_gpio_db_set(0x0F);      /* DB 0-7 zero */
-	DELAY;
-	gpio_set_value(LCD_E,false); /*Enable signal High */
-	DELAY;	
-	gpio_set_value(LCD_RW,true); /*Read */
-	gpio_set_value(LCD_RS,true); /*Data */
-	klcd_gpio_db_set(0x00);      /* DB 0-7 zero */
-	DELAY;
-	DELAY;
-	gpio_set_value(LCD_E,true); /*Enable signal High */
-	DELAY;
-	gpio_set_value(LCD_E,false); /*Enable signal High */
-
-
-	mdelay(5);                   /* delay after first command*/
-	gpio_set_value(LCD_RW,false); /*Write */
-	gpio_set_value(LCD_RS,false); /*Instruction */
-	DELAY;
-	gpio_set_value(LCD_E,true); /*Enable signal High */
-	DELAY;
-	klcd_gpio_db_set(0x01);      /* DB 0-7 zero */
-	DELAY;
-	gpio_set_value(LCD_E,false); /*Enable signal High */
-	DELAY;	
-	gpio_set_value(LCD_RW,true); /*Read */
-	gpio_set_value(LCD_RS,true); /*Data */
-	klcd_gpio_db_set(0x00);      /* DB 0-7 zero */
-	DELAY;
-	DELAY;
-	gpio_set_value(LCD_E,true); /*Enable signal High */
-	DELAY;
+            mdelay(5);					 /* delay after first command*/
+            gpio_set_value(LCD_RW,false); /*Write */
+            gpio_set_value(LCD_RS,true); /*Instruction */
+            DELAY;
+            gpio_set_value(LCD_E,true); /*Enable signal High */
+            DELAY;
+            klcd_gpio_db_set(0x02);	   /* Carriage return */
+            DELAY;
+            gpio_set_value(LCD_E,false); /*Enable signal High */
+            DELAY;	
+            gpio_set_value(LCD_RW,true); /*Read */
+            DELAY;
+            gpio_set_value(LCD_E,true); /*Enable signal High */
+            DELAY;
+     
+            j = 0;
+        }
+#if 0   /* TODO carriage manipulation */
+        if(j % 32 == 0) {
+        }
 #endif
+        mdelay(5);					 /* delay after first command*/
+        gpio_set_value(LCD_RW,false); /*Write */
+        gpio_set_value(LCD_RS,true); /*Instruction */
+        DELAY;
+        gpio_set_value(LCD_E,true); /*Enable signal High */
+        DELAY;
+        klcd_gpio_db_set(i);	   /* DB 0-7 zero */
+        DELAY;
+        gpio_set_value(LCD_E,false); /*Enable signal High */
+        DELAY;	
+        gpio_set_value(LCD_RW,true); /*Read */
+        DELAY;
+        gpio_set_value(LCD_E,true); /*Enable signal High */
+        DELAY;
 
-	
+        j++;
+    }
+
+
+#if 0
 	mdelay(5);                   /* delay after first command*/
 	gpio_set_value(LCD_RW,false); /*Write */
 	gpio_set_value(LCD_RS,true); /*Instruction */
@@ -603,6 +494,7 @@ void klcd_clear_display(void)
 	DELAY;
 	gpio_set_value(LCD_E,true); /*Enable signal High */
 	DELAY;
+#endif
 } 
 
 void klcd_gpio_db_set(u_int8_t data)
@@ -712,6 +604,24 @@ void    klcd_all_gpio_set(bool value)
 	gpio_set_value(LCD_DB6,value);
 	gpio_set_value(LCD_DB7,value);
 }
+
+inline klcd_cmd_t ascii_to_wh1602b(char symbol)
+{
+    if(symbol | 0xFF != 0xFF) {
+        return UNDEFINED_CMD; /* symbol val 128...255 is not supported */
+    }
+
+    return ascii_to_wh1602b_table[(u_int8_t)symbol].code;
+}
+
+inline klcd_cmd_t utf8_cyrylic_to_wh1602b(u_int8_t symbol)
+{
+}
+
+inline klcd_cmd_t utf32_symbol_to_wh1602b(u_int32_t symbol)
+{
+}
+
 
 module_init(klcd_init);
 module_exit(klcd_exit);
